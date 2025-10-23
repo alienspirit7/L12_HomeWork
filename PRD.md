@@ -8,12 +8,12 @@
 | Field | Value |
 |-------|-------|
 | **Product Name** | Gmail MCP Server |
-| **Version** | 1.0 |
+| **Version** | 1.1 |
 | **Date** | October 23, 2025 |
 | **Owner** | Development Team |
 | **Status** | Completed |
-| **Estimated Effort** | 3 hours |
-| **Actual Effort** | 3 hours |
+| **Estimated Effort** | 3.5 hours |
+| **Actual Effort** | 3.5 hours |
 
 ---
 
@@ -93,7 +93,19 @@ Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI
 
 ### 4.1 Primary User Stories
 
-#### Story 1: Extract Course Emails
+#### Story 1: Quick Recent Email Check
+**As a** user
+**I want to** quickly see my most recent emails without specifying dates
+**So that** I can check my latest messages immediately
+
+**Acceptance Criteria**:
+- Can retrieve emails without any required parameters
+- Defaults to showing last 10 emails
+- Can specify custom count (e.g., 3, 5, 20)
+- Results show newest emails first
+- Includes full email metadata and body
+
+#### Story 2: Extract Course Emails
 **As a** student
 **I want to** extract all emails related to my courses for a specific date range
 **So that** I can review assignments and announcements in one place
@@ -105,7 +117,7 @@ Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI
 - Results include email metadata (subject, sender, date, snippet)
 - Retrieves up to 100 emails per query
 
-#### Story 2: Generate Email Summary
+#### Story 3: Generate Email Summary
 **As a** busy professional
 **I want to** get an AI-generated summary of my emails
 **So that** I can quickly understand key communications without reading every email
@@ -117,7 +129,7 @@ Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI
 - Highlights key topics and themes
 - Summary is concise (3-5 sentences)
 
-#### Story 3: Export to Excel
+#### Story 4: Export to Excel
 **As a** user who needs to report on emails
 **I want to** export emails to Excel with proper formatting
 **So that** I can share and analyze the data in spreadsheet format
@@ -129,7 +141,7 @@ Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI
 - Auto-adjusted column widths
 - Professional formatting with bold headers
 
-#### Story 4: Connect to Claude CLI
+#### Story 5: Connect to Claude CLI
 **As a** Claude CLI user
 **I want to** use natural language commands to access my Gmail
 **So that** I can manage emails within my AI assistant workflow
@@ -168,7 +180,50 @@ Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI
 
 ## 5. Functional Requirements
 
-### 5.1 Email Extraction (extract_lesson_emails)
+### 5.1 Recent Email Retrieval (get_recent_emails)
+
+**Priority**: P0 (Must Have)
+
+**Requirements**:
+- **FR-0.1**: Retrieve most recent emails without date filtering
+- **FR-0.2**: Support configurable max_results parameter (default: 10, max: 100)
+- **FR-0.3**: Return emails in chronological order (newest first)
+- **FR-0.4**: Return same structured JSON format as extract_lesson_emails
+- **FR-0.5**: No required parameters (all optional)
+- **FR-0.6**: Enable quick access to latest inbox messages
+- **FR-0.7**: Handle Gmail API errors gracefully
+
+**Input Schema**:
+```json
+{
+  "max_results": 10
+}
+```
+
+**Output Schema**:
+```json
+[
+  {
+    "id": "email_id",
+    "thread_id": "thread_id",
+    "from": "sender@example.com",
+    "to": "recipient@example.com",
+    "subject": "Email subject",
+    "date": "Thu, 23 Oct 2025 18:22:18 GMT",
+    "snippet": "Email preview text...",
+    "body": "Full email body...",
+    "labels": ["INBOX"],
+    "has_attachments": false
+  }
+]
+```
+
+**Use Cases**:
+- Quick check of latest emails: "What are my last 3 emails?"
+- Recent message review: "Show me my 5 most recent emails"
+- Quick inbox scan without needing to specify dates
+
+### 5.2 Email Extraction (extract_lesson_emails)
 
 **Priority**: P0 (Must Have)
 
@@ -211,7 +266,7 @@ Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI
 ]
 ```
 
-### 5.2 Email Summarization (summarize_emails)
+### 5.3 Email Summarization (summarize_emails)
 
 **Priority**: P0 (Must Have)
 
@@ -250,7 +305,7 @@ Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI
 }
 ```
 
-### 5.3 Excel Export (create_excel_file)
+### 5.4 Excel Export (create_excel_file)
 
 **Priority**: P0 (Must Have)
 
@@ -275,7 +330,7 @@ Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI
 
 **Output**: String with created filename
 
-### 5.4 Email Count (get_email_count)
+### 5.5 Email Count (get_email_count)
 
 **Priority**: P1 (Should Have)
 
@@ -296,7 +351,7 @@ Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI
 
 **Output**: Integer count
 
-### 5.5 Authentication
+### 5.6 Authentication
 
 **Priority**: P0 (Must Have)
 
@@ -310,7 +365,7 @@ Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI
 - **FR-5.7**: Open browser for user consent
 - **FR-5.8**: Handle authentication errors with clear messages
 
-### 5.6 MCP Integration
+### 5.7 MCP Integration
 
 **Priority**: P0 (Must Have)
 

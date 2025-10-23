@@ -105,7 +105,26 @@ If you're using Claude Desktop app instead of Claude CLI, edit the config file:
 }
 ```
 
+### Quick Standalone Script
+
+To quickly get recent emails without using Claude, run:
+
+```bash
+# Get last 3 emails (default)
+python get_recent_emails.py
+
+# Get specific number of emails
+python get_recent_emails.py 5
+python get_recent_emails.py 10
+```
+
 ### Example Commands
+
+**Get recent emails:**
+```
+Show me my last 3 emails
+What are my 5 most recent emails?
+```
 
 **Extract lesson emails:**
 ```
@@ -124,7 +143,20 @@ Extract homework emails and create an Excel file
 
 ## Available Tools
 
-### 1. extract_lesson_emails
+### 1. get_recent_emails
+
+Get the most recent emails from your inbox without date filtering.
+
+**Parameters:**
+- `max_results` (optional): Number of recent emails to retrieve (default: 10, max: 100)
+
+**Example:**
+```
+Show me my last 5 emails
+Get my 3 most recent emails
+```
+
+### 2. extract_lesson_emails
 
 Extract emails with advanced filtering.
 
@@ -135,7 +167,7 @@ Extract emails with advanced filtering.
 - `keywords` (optional): Array of keywords
 - `max_results` (optional): Max emails to return (default: 100)
 
-### 2. summarize_emails
+### 3. summarize_emails
 
 Generate AI-powered summary using Gemini.
 
@@ -144,7 +176,7 @@ Generate AI-powered summary using Gemini.
 - `start_date` (optional): Period start
 - `end_date` (optional): Period end
 
-### 3. create_excel_file
+### 4. create_excel_file
 
 Create Excel file with Hebrew support.
 
@@ -153,7 +185,7 @@ Create Excel file with Hebrew support.
 - `filename` (optional): Output filename
 - `sheet_name` (optional): Excel sheet name
 
-### 4. get_email_count
+### 5. get_email_count
 
 Count emails matching criteria.
 

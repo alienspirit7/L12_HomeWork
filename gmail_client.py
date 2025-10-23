@@ -44,6 +44,36 @@ class GmailMCPServer:
         creds = Credentials.from_authorized_user_file('token.json')
         self.gmail_service = build('gmail', 'v1', credentials=creds)
 
+    def get_recent_emails(self, max_results=10):
+        """
+        Get the most recent emails from inbox (without date filtering)
+
+        Args:
+            max_results: Number of recent emails to retrieve (default: 10)
+
+        Returns:
+            List of email data dictionaries
+        """
+        results = self.gmail_service.users().messages().list(
+            userId='me',
+            maxResults=max_results
+        ).execute()
+
+        messages = results.get('messages', [])
+
+        # Extract email data
+        email_data = []
+        for msg in messages:
+            email = self.gmail_service.users().messages().get(
+                userId='me',
+                id=msg['id'],
+                format='full'
+            ).execute()
+
+            email_data.append(self._parse_email(email))
+
+        return email_data
+
     def extract_lesson_emails(self, start_date, end_date, recipient=None,
                              keywords=None, max_results=100):
         """

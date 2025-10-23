@@ -106,6 +106,19 @@ TOOLS = [
                 }
             }
         }
+    },
+    {
+        "name": "get_recent_emails",
+        "description": "Get the most recent emails from inbox without date filtering",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "max_results": {
+                    "type": "integer",
+                    "description": "Number of recent emails to retrieve (default: 10, max: 100)"
+                }
+            }
+        }
     }
 ]
 
@@ -148,6 +161,12 @@ def handle_tool_call(tool_name, arguments):
             end_date=arguments.get('end_date')
         )
         return f"Email count: {count}"
+
+    elif tool_name == 'get_recent_emails':
+        result = server.get_recent_emails(
+            max_results=arguments.get('max_results', 10)
+        )
+        return json.dumps(result, ensure_ascii=False, indent=2)
 
     else:
         return f"Unknown tool: {tool_name}"
