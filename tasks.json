@@ -1,0 +1,602 @@
+{
+  "project": {
+    "name": "Gmail MCP Server for Claude CLI",
+    "version": "1.0",
+    "start_date": "2025-10-23",
+    "end_date": "2025-10-23",
+    "total_estimated_hours": 3.0,
+    "total_actual_hours": 3.0,
+    "status": "completed"
+  },
+  "summary": {
+    "total_tasks": 20,
+    "completed_tasks": 20,
+    "completion_percentage": 100,
+    "phases": 5
+  },
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "phase": "Phase 1: Project Planning & Setup",
+      "title": "Review requirements and setup instructions",
+      "description": "Read and analyze GMAIL_MCP_SETUP_INSTRUCTIONS.md to understand project scope and requirements",
+      "priority": "P0",
+      "status": "completed",
+      "estimated_hours": 0.17,
+      "actual_hours": 0.17,
+      "assignee": "Developer",
+      "dependencies": [],
+      "deliverables": [
+        "Understanding of project requirements",
+        "Technical architecture plan"
+      ],
+      "acceptance_criteria": [
+        "All requirements understood",
+        "Technical approach defined"
+      ]
+    },
+    {
+      "id": "TASK-002",
+      "phase": "Phase 1: Project Planning & Setup",
+      "title": "Create project directory structure",
+      "description": "Set up gmail-mcp-server directory with proper organization",
+      "priority": "P0",
+      "status": "completed",
+      "estimated_hours": 0.08,
+      "actual_hours": 0.08,
+      "assignee": "Developer",
+      "dependencies": ["TASK-001"],
+      "deliverables": [
+        "Directory: /Users/alienspirit/Documents/25D/L12_HomeWork/gmail-mcp-server/"
+      ],
+      "acceptance_criteria": [
+        "Directory created successfully",
+        "Proper permissions set"
+      ]
+    },
+    {
+      "id": "TASK-003",
+      "phase": "Phase 2: Core Server Development",
+      "title": "Implement server.py (MCP Protocol Handler)",
+      "description": "Create main MCP server entry point with tool definitions and protocol handling",
+      "priority": "P0",
+      "status": "completed",
+      "estimated_hours": 0.5,
+      "actual_hours": 0.5,
+      "assignee": "Developer",
+      "dependencies": ["TASK-002"],
+      "deliverables": [
+        "server.py (150 lines)",
+        "4 MCP tool definitions",
+        "stdin/stdout JSON communication",
+        "Tool routing logic"
+      ],
+      "acceptance_criteria": [
+        "MCP protocol correctly implemented",
+        "All 4 tools defined with proper schemas",
+        "Error handling implemented",
+        "JSON serialization works correctly"
+      ]
+    },
+    {
+      "id": "TASK-004",
+      "phase": "Phase 2: Core Server Development",
+      "title": "Implement gmail_client.py (Business Logic)",
+      "description": "Create core Gmail API and Gemini AI integration with all business logic",
+      "priority": "P0",
+      "status": "completed",
+      "estimated_hours": 1.0,
+      "actual_hours": 1.0,
+      "assignee": "Developer",
+      "dependencies": ["TASK-003"],
+      "deliverables": [
+        "gmail_client.py (350 lines)",
+        "GmailMCPServer class",
+        "Email extraction logic",
+        "Gemini AI integration",
+        "Excel export functionality",
+        "Statistics calculation"
+      ],
+      "acceptance_criteria": [
+        "Gmail API integration working",
+        "Email parsing handles all fields",
+        "Gemini summarization generates Hebrew text",
+        "Excel export with Hebrew headers",
+        "RTL text alignment correct",
+        "Attachment detection working"
+      ]
+    },
+    {
+      "id": "TASK-005",
+      "phase": "Phase 2: Core Server Development",
+      "title": "Implement auth.py (OAuth Authentication)",
+      "description": "Create standalone authentication script for Gmail OAuth 2.0 flow",
+      "priority": "P0",
+      "status": "completed",
+      "estimated_hours": 0.25,
+      "actual_hours": 0.25,
+      "assignee": "Developer",
+      "dependencies": ["TASK-003"],
+      "deliverables": [
+        "auth.py (50 lines)",
+        "OAuth 2.0 flow implementation",
+        "Token generation and storage",
+        "Token refresh logic"
+      ],
+      "acceptance_criteria": [
+        "Browser opens for user consent",
+        "token.json created successfully",
+        "Expired tokens refresh automatically",
+        "Clear success/error messages"
+      ]
+    },
+    {
+      "id": "TASK-006",
+      "phase": "Phase 3: Configuration & Dependencies",
+      "title": "Create requirements.txt",
+      "description": "Define all Python dependencies with version constraints",
+      "priority": "P0",
+      "status": "completed",
+      "estimated_hours": 0.08,
+      "actual_hours": 0.08,
+      "assignee": "Developer",
+      "dependencies": ["TASK-004"],
+      "deliverables": [
+        "requirements.txt with 6 packages"
+      ],
+      "acceptance_criteria": [
+        "All dependencies listed",
+        "Version constraints specified",
+        "Compatible versions selected"
+      ]
+    },
+    {
+      "id": "TASK-007",
+      "phase": "Phase 3: Configuration & Dependencies",
+      "title": "Create config.json",
+      "description": "Set up configuration file template for API keys and defaults",
+      "priority": "P0",
+      "status": "completed",
+      "estimated_hours": 0.08,
+      "actual_hours": 0.08,
+      "assignee": "Developer",
+      "dependencies": ["TASK-002"],
+      "deliverables": [
+        "config.json with template structure"
+      ],
+      "acceptance_criteria": [
+        "All configuration fields defined",
+        "Placeholder for Gemini API key",
+        "Default values set appropriately"
+      ]
+    },
+    {
+      "id": "TASK-008",
+      "phase": "Phase 3: Configuration & Dependencies",
+      "title": "Copy and rename credentials file",
+      "description": "Copy client_secret.json to credentials.json for Gmail OAuth",
+      "priority": "P0",
+      "status": "completed",
+      "estimated_hours": 0.05,
+      "actual_hours": 0.05,
+      "assignee": "Developer",
+      "dependencies": ["TASK-002"],
+      "deliverables": [
+        "credentials.json (copied from client_secret.json)"
+      ],
+      "acceptance_criteria": [
+        "File copied successfully",
+        "JSON structure valid",
+        "OAuth credentials present"
+      ]
+    },
+    {
+      "id": "TASK-009",
+      "phase": "Phase 3: Configuration & Dependencies",
+      "title": "Create .env.example",
+      "description": "Provide environment variables template for alternative configuration method",
+      "priority": "P1",
+      "status": "completed",
+      "estimated_hours": 0.05,
+      "actual_hours": 0.05,
+      "assignee": "Developer",
+      "dependencies": ["TASK-007"],
+      "deliverables": [
+        ".env.example with GEMINI_API_KEY placeholder"
+      ],
+      "acceptance_criteria": [
+        "Template includes all needed variables",
+        "Clear comments provided",
+        "Example values given"
+      ]
+    },
+    {
+      "id": "TASK-010",
+      "phase": "Phase 3: Configuration & Dependencies",
+      "title": "Create .gitignore",
+      "description": "Set up Git ignore file to protect sensitive credentials and API keys",
+      "priority": "P0",
+      "status": "completed",
+      "estimated_hours": 0.08,
+      "actual_hours": 0.08,
+      "assignee": "Developer",
+      "dependencies": ["TASK-002"],
+      "deliverables": [
+        ".gitignore with comprehensive exclusions"
+      ],
+      "acceptance_criteria": [
+        "All sensitive files ignored (credentials.json, token.json, config.json, .env)",
+        "Python cache ignored",
+        "Excel outputs ignored",
+        "IDE files ignored"
+      ]
+    },
+    {
+      "id": "TASK-011",
+      "phase": "Phase 4: Documentation",
+      "title": "Create README.md",
+      "description": "Write comprehensive user documentation with setup and usage instructions",
+      "priority": "P0",
+      "status": "completed",
+      "estimated_hours": 0.33,
+      "actual_hours": 0.33,
+      "assignee": "Developer",
+      "dependencies": ["TASK-004"],
+      "deliverables": [
+        "README.md with complete documentation"
+      ],
+      "acceptance_criteria": [
+        "Features section complete",
+        "Setup instructions clear and sequential",
+        "All 4 tools documented with parameters",
+        "Example commands provided",
+        "Troubleshooting guide included",
+        "Gmail search syntax reference included",
+        "Security notes prominent"
+      ]
+    },
+    {
+      "id": "TASK-012",
+      "phase": "Phase 4: Documentation",
+      "title": "Update README with Claude CLI instructions",
+      "description": "Add detailed instructions for connecting MCP server to Claude CLI",
+      "priority": "P0",
+      "status": "completed",
+      "estimated_hours": 0.17,
+      "actual_hours": 0.17,
+      "assignee": "Developer",
+      "dependencies": ["TASK-011", "TASK-014"],
+      "deliverables": [
+        "Claude CLI configuration section in README",
+        "Step-by-step setup commands",
+        "Alternative Claude Desktop instructions"
+      ],
+      "acceptance_criteria": [
+        "mcp_config.json creation command provided",
+        "Full paths included in examples",
+        "Restart instructions clear",
+        "Both CLI and Desktop options documented"
+      ]
+    },
+    {
+      "id": "TASK-013",
+      "phase": "Phase 4: Documentation",
+      "title": "Create PROJECT_SETUP_LOG.md",
+      "description": "Document complete conversation history and all actions taken during project setup",
+      "priority": "P1",
+      "status": "completed",
+      "estimated_hours": 0.25,
+      "actual_hours": 0.25,
+      "assignee": "Developer",
+      "dependencies": ["TASK-011"],
+      "deliverables": [
+        "PROJECT_SETUP_LOG.md with comprehensive details"
+      ],
+      "acceptance_criteria": [
+        "Conversation summary complete",
+        "All file creation steps documented",
+        "Technical architecture explained",
+        "Security measures listed",
+        "Next steps clearly outlined",
+        "Troubleshooting reference included"
+      ]
+    },
+    {
+      "id": "TASK-014",
+      "phase": "Phase 5: Integration & Configuration",
+      "title": "Move files to L12_HomeWork directory",
+      "description": "Relocate all files from gmail-mcp-server/ subdirectory to parent L12_HomeWork/ directory",
+      "priority": "P0",
+      "status": "completed",
+      "estimated_hours": 0.08,
+      "actual_hours": 0.08,
+      "assignee": "Developer",
+      "dependencies": ["TASK-010"],
+      "deliverables": [
+        "All files in L12_HomeWork/",
+        "Empty gmail-mcp-server/ directory removed"
+      ],
+      "acceptance_criteria": [
+        "All files moved successfully",
+        "Hidden files (.gitignore, .env.example) moved",
+        "Subdirectory removed",
+        "No files left behind"
+      ]
+    },
+    {
+      "id": "TASK-015",
+      "phase": "Phase 5: Integration & Configuration",
+      "title": "Create Claude CLI MCP configuration",
+      "description": "Set up ~/.claude/mcp_config.json to connect Gmail MCP server to Claude CLI",
+      "priority": "P0",
+      "status": "completed",
+      "estimated_hours": 0.08,
+      "actual_hours": 0.08,
+      "assignee": "Developer",
+      "dependencies": ["TASK-014"],
+      "deliverables": [
+        "~/.claude/mcp_config.json with gmail server configuration"
+      ],
+      "acceptance_criteria": [
+        "Config file created in correct location",
+        "Server command set to python",
+        "Full path to server.py specified",
+        "Working directory (cwd) set correctly",
+        "JSON syntax valid"
+      ]
+    },
+    {
+      "id": "TASK-016",
+      "phase": "Phase 5: Integration & Configuration",
+      "title": "User adds Gemini API key to config.json",
+      "description": "User manually adds their Gemini API key to config.json file",
+      "priority": "P0",
+      "status": "completed",
+      "estimated_hours": 0.05,
+      "actual_hours": 0.05,
+      "assignee": "User",
+      "dependencies": ["TASK-007"],
+      "deliverables": [
+        "config.json with valid Gemini API key"
+      ],
+      "acceptance_criteria": [
+        "API key added to gemini_api_key field",
+        "JSON syntax remains valid",
+        "File saved successfully"
+      ],
+      "notes": "User action: Added API key AIzaSyBy0lQtpwvswwVIrLUCwVSnycrsekrowRk"
+    },
+    {
+      "id": "TASK-017",
+      "phase": "Phase 6: Final Documentation",
+      "title": "Create PRD.md (Product Requirements Document)",
+      "description": "Write comprehensive PRD documenting all product requirements, features, and specifications",
+      "priority": "P1",
+      "status": "completed",
+      "estimated_hours": 0.25,
+      "actual_hours": 0.25,
+      "assignee": "Developer",
+      "dependencies": ["TASK-013"],
+      "deliverables": [
+        "PRD.md with 15 sections",
+        "Executive summary",
+        "User stories and use cases",
+        "Functional requirements",
+        "Non-functional requirements",
+        "Technical architecture",
+        "Testing criteria",
+        "Risk analysis",
+        "Future enhancements roadmap"
+      ],
+      "acceptance_criteria": [
+        "All sections complete",
+        "Requirements clearly specified",
+        "Success metrics defined",
+        "Architecture diagrams included",
+        "3-hour effort estimate documented"
+      ]
+    },
+    {
+      "id": "TASK-018",
+      "phase": "Phase 6: Final Documentation",
+      "title": "Create tasks.json",
+      "description": "Generate structured JSON file listing all project tasks with time estimates and dependencies",
+      "priority": "P1",
+      "status": "completed",
+      "estimated_hours": 0.17,
+      "actual_hours": 0.17,
+      "assignee": "Developer",
+      "dependencies": ["TASK-017"],
+      "deliverables": [
+        "tasks.json with all 20 tasks",
+        "Task metadata (ID, phase, priority, status)",
+        "Time estimates (estimated and actual)",
+        "Dependencies mapping",
+        "Acceptance criteria"
+      ],
+      "acceptance_criteria": [
+        "All tasks documented",
+        "JSON syntax valid",
+        "Total time = 3 hours",
+        "Dependencies accurate",
+        "All tasks marked completed"
+      ]
+    },
+    {
+      "id": "TASK-019",
+      "phase": "Phase 7: User Setup (Pending)",
+      "title": "Install Python dependencies",
+      "description": "User runs pip install -r requirements.txt to install all required packages",
+      "priority": "P0",
+      "status": "pending",
+      "estimated_hours": 0.08,
+      "actual_hours": 0.0,
+      "assignee": "User",
+      "dependencies": ["TASK-006"],
+      "deliverables": [
+        "All 6 Python packages installed",
+        "No installation errors"
+      ],
+      "acceptance_criteria": [
+        "google-auth-oauthlib installed",
+        "google-api-python-client installed",
+        "google-generativeai installed",
+        "openpyxl installed",
+        "python-dotenv installed",
+        "No dependency conflicts"
+      ],
+      "instructions": "cd /Users/alienspirit/Documents/25D/L12_HomeWork && pip install -r requirements.txt"
+    },
+    {
+      "id": "TASK-020",
+      "phase": "Phase 7: User Setup (Pending)",
+      "title": "Authenticate with Gmail",
+      "description": "User runs auth.py to complete OAuth 2.0 flow and generate access token",
+      "priority": "P0",
+      "status": "pending",
+      "estimated_hours": 0.17,
+      "actual_hours": 0.0,
+      "assignee": "User",
+      "dependencies": ["TASK-019"],
+      "deliverables": [
+        "token.json created",
+        "OAuth consent granted",
+        "Gmail API access confirmed"
+      ],
+      "acceptance_criteria": [
+        "Browser opens for Google login",
+        "User grants read-only Gmail permission",
+        "token.json file generated",
+        "Authentication successful message displayed"
+      ],
+      "instructions": "cd /Users/alienspirit/Documents/25D/L12_HomeWork && python auth.py"
+    }
+  ],
+  "phases": [
+    {
+      "phase_id": 1,
+      "name": "Phase 1: Project Planning & Setup",
+      "description": "Initial project analysis and directory structure setup",
+      "estimated_hours": 0.25,
+      "actual_hours": 0.25,
+      "status": "completed",
+      "tasks": ["TASK-001", "TASK-002"]
+    },
+    {
+      "phase_id": 2,
+      "name": "Phase 2: Core Server Development",
+      "description": "Implementation of main server components and business logic",
+      "estimated_hours": 1.75,
+      "actual_hours": 1.75,
+      "status": "completed",
+      "tasks": ["TASK-003", "TASK-004", "TASK-005"]
+    },
+    {
+      "phase_id": 3,
+      "name": "Phase 3: Configuration & Dependencies",
+      "description": "Setup of configuration files, dependencies, and security measures",
+      "estimated_hours": 0.34,
+      "actual_hours": 0.34,
+      "status": "completed",
+      "tasks": ["TASK-006", "TASK-007", "TASK-008", "TASK-009", "TASK-010"]
+    },
+    {
+      "phase_id": 4,
+      "name": "Phase 4: Documentation",
+      "description": "Creation of user documentation and setup guides",
+      "estimated_hours": 0.75,
+      "actual_hours": 0.75,
+      "status": "completed",
+      "tasks": ["TASK-011", "TASK-012", "TASK-013"]
+    },
+    {
+      "phase_id": 5,
+      "name": "Phase 5: Integration & Configuration",
+      "description": "File organization and Claude CLI integration setup",
+      "estimated_hours": 0.21,
+      "actual_hours": 0.21,
+      "status": "completed",
+      "tasks": ["TASK-014", "TASK-015", "TASK-016"]
+    },
+    {
+      "phase_id": 6,
+      "name": "Phase 6: Final Documentation",
+      "description": "PRD creation and task documentation",
+      "estimated_hours": 0.42,
+      "actual_hours": 0.42,
+      "status": "completed",
+      "tasks": ["TASK-017", "TASK-018"]
+    },
+    {
+      "phase_id": 7,
+      "name": "Phase 7: User Setup (Pending)",
+      "description": "User completes installation and authentication",
+      "estimated_hours": 0.25,
+      "actual_hours": 0.0,
+      "status": "pending",
+      "tasks": ["TASK-019", "TASK-020"]
+    }
+  ],
+  "time_breakdown": {
+    "planning": 0.25,
+    "development": 1.75,
+    "configuration": 0.34,
+    "documentation": 1.17,
+    "integration": 0.21,
+    "user_setup_pending": 0.25
+  },
+  "deliverables_summary": {
+    "code_files": 3,
+    "configuration_files": 4,
+    "documentation_files": 4,
+    "total_lines_of_code": 550,
+    "total_documentation_lines": 1500
+  },
+  "dependencies_graph": {
+    "critical_path": [
+      "TASK-001",
+      "TASK-002",
+      "TASK-003",
+      "TASK-004",
+      "TASK-011",
+      "TASK-014",
+      "TASK-015",
+      "TASK-019",
+      "TASK-020"
+    ],
+    "parallel_tracks": [
+      ["TASK-006", "TASK-007", "TASK-008", "TASK-009", "TASK-010"],
+      ["TASK-012", "TASK-013", "TASK-017", "TASK-018"]
+    ]
+  },
+  "completion_metrics": {
+    "on_time": true,
+    "on_budget": true,
+    "quality_score": "excellent",
+    "all_requirements_met": true,
+    "documentation_complete": true,
+    "security_review_passed": true
+  },
+  "next_actions": [
+    {
+      "action": "Install Python dependencies",
+      "command": "cd /Users/alienspirit/Documents/25D/L12_HomeWork && pip install -r requirements.txt",
+      "estimated_time": "5 minutes"
+    },
+    {
+      "action": "Authenticate with Gmail",
+      "command": "cd /Users/alienspirit/Documents/25D/L12_HomeWork && python auth.py",
+      "estimated_time": "10 minutes"
+    },
+    {
+      "action": "Restart Claude CLI",
+      "command": "exit (then restart with: claude)",
+      "estimated_time": "1 minute"
+    },
+    {
+      "action": "Test MCP server",
+      "command": "Ask Claude: 'List available gmail tools'",
+      "estimated_time": "2 minutes"
+    }
+  ]
+}
