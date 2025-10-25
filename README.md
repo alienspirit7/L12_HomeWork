@@ -76,8 +76,8 @@ cat > ~/.claude/mcp_config.json << 'EOF'
   "mcpServers": {
     "gmail": {
       "command": "python",
-      "args": ["/Users/alienspirit/Documents/25D/L12_HomeWork/server.py"],
-      "cwd": "/Users/alienspirit/Documents/25D/L12_HomeWork"
+      "args": ["$HOME/Documents/25D/L12_HomeWork/server.py"],
+      "cwd": "$HOME/Documents/25D/L12_HomeWork"
     }
   }
 }
@@ -110,10 +110,10 @@ cat > ~/.config/claude-code/mcp.json << 'EOF'
     "gmail": {
       "command": "python3",
       "args": [
-        "/Users/alienspirit/Documents/25D/L12_HomeWork/server.py"
+        "$HOME/Documents/25D/L12_HomeWork/server.py"
       ],
       "env": {
-        "PYTHONPATH": "/Users/alienspirit/Documents/25D/L12_HomeWork",
+        "PYTHONPATH": "$HOME/Documents/25D/L12_HomeWork",
         "GEMINI_API_KEY": "${GEMINI_API_KEY}"
       }
     }

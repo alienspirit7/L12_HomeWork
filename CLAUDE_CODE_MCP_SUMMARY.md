@@ -15,10 +15,10 @@ Your Gmail MCP Server is now fully configured to work with **Claude Code** in VS
     "gmail": {
       "command": "python3",
       "args": [
-        "/Users/alienspirit/Documents/25D/L12_HomeWork/server.py"
+        "$HOME/Documents/25D/L12_HomeWork/server.py"
       ],
       "env": {
-        "PYTHONPATH": "/Users/alienspirit/Documents/25D/L12_HomeWork",
+        "PYTHONPATH": "$HOME/Documents/25D/L12_HomeWork",
         "GEMINI_API_KEY": "${GEMINI_API_KEY}"
       }
     }

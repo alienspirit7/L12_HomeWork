@@ -47,7 +47,7 @@
       "assignee": "Developer",
       "dependencies": ["TASK-001"],
       "deliverables": [
-        "Directory: /Users/alienspirit/Documents/25D/L12_HomeWork/gmail-mcp-server/"
+        "Directory: $HOME/Documents/25D/L12_HomeWork/gmail-mcp-server/"
       ],
       "acceptance_criteria": [
         "Directory created successfully",
@@ -537,7 +537,7 @@
         "python-dotenv installed",
         "No dependency conflicts"
       ],
-      "instructions": "cd /Users/alienspirit/Documents/25D/L12_HomeWork && pip install -r requirements.txt"
+      "instructions": "cd $HOME/Documents/25D/L12_HomeWork && pip install -r requirements.txt"
     },
     {
       "id": "TASK-024",
@@ -561,7 +561,7 @@
         "token.json file generated",
         "Authentication successful message displayed"
       ],
-      "instructions": "cd /Users/alienspirit/Documents/25D/L12_HomeWork && python auth.py"
+      "instructions": "cd $HOME/Documents/25D/L12_HomeWork && python auth.py"
     },
     {
       "id": "TASK-025",
@@ -818,12 +818,12 @@
   "completed_actions": [
     {
       "action": "Install Python dependencies",
-      "command": "cd /Users/alienspirit/Documents/25D/L12_HomeWork && pip install -r requirements.txt",
+      "command": "cd $HOME/Documents/25D/L12_HomeWork && pip install -r requirements.txt",
       "status": "completed"
     },
     {
       "action": "Authenticate with Gmail",
-      "command": "cd /Users/alienspirit/Documents/25D/L12_HomeWork && python auth.py",
+      "command": "cd $HOME/Documents/25D/L12_HomeWork && python auth.py",
       "status": "completed"
     },
     {

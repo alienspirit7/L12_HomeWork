@@ -28,10 +28,10 @@ cat > ~/.config/claude-code/mcp.json << 'EOF'
     "gmail": {
       "command": "python3",
       "args": [
-        "/Users/alienspirit/Documents/25D/L12_HomeWork/server.py"
+        "$HOME/Documents/25D/L12_HomeWork/server.py"
       ],
       "env": {
-        "PYTHONPATH": "/Users/alienspirit/Documents/25D/L12_HomeWork",
+        "PYTHONPATH": "$HOME/Documents/25D/L12_HomeWork",
         "GEMINI_API_KEY": "${GEMINI_API_KEY}"
       }
     }
@@ -86,7 +86,7 @@ The project's `config.json` file already contains the Gemini API key, so no addi
 Run the test script to ensure everything is set up correctly:
 
 ```bash
-cd /Users/alienspirit/Documents/25D/L12_HomeWork
+cd $HOME/Documents/25D/L12_HomeWork
 python3 test_mcp_setup.py
 ```
 
@@ -315,7 +315,7 @@ If you encounter issues:
 
 **Config File**: `~/.config/claude-code/mcp.json`
 **Test Script**: `python3 test_mcp_setup.py`
-**Project Path**: `/Users/alienspirit/Documents/25D/L12_HomeWork`
+**Project Path**: `$HOME/Documents/25D/L12_HomeWork`
 
 **Restart VS Code**: Cmd+Q (macOS), Alt+F4 (Windows), Ctrl+Q (Linux)
 
