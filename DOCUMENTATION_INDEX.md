@@ -89,13 +89,6 @@ python3 test_mcp_setup.py
 
 ---
 
-#### 📊 [PROJECT_SETUP_LOG.md](PROJECT_SETUP_LOG.md)
-**Setup log and notes** - Development notes and setup history.
-
-**Use this when:** You need to understand the project's development history or setup process.
-
----
-
 ## 🎯 Quick Navigation by Use Case
 
 ### "I want to set up Gmail MCP for Claude Code"
@@ -151,17 +144,15 @@ python3 test_mcp_setup.py
 ```
 L12_HomeWork/
 ├── 📖 README.md                           # Main documentation
-├── 🚀 CLAUDE_CODE_SETUP.md                # Claude Code quick setup ⭐
+├── 🚀 CLAUDE_CODE_SETUP.md                # Claude Code setup guide ⭐
 ├── 📋 GMAIL_MCP_SETUP_INSTRUCTIONS.md     # Complete setup guide
 ├── 📚 DOCUMENTATION_INDEX.md              # This file
 ├── 📝 CHANGELOG.md                        # Version history
-├── 📊 PROJECT_SETUP_LOG.md                # Setup notes
 │
 ├── 🐍 server.py                           # Main MCP server
 ├── 📧 gmail_client.py                     # Gmail API client
 ├── 🔐 auth.py                             # Authentication script
 ├── ✅ test_mcp_setup.py                   # Verification script
-├── 🧪 test_recent_emails.py               # Email testing script
 ├── 📬 get_recent_emails.py                # Quick email fetch script
 │
 ├── ⚙️ config.json                         # Configuration
@@ -229,3 +220,4 @@ All are already in `.gitignore`.
 ---
 
 **Last Updated**: October 25, 2025
+**Note**: Documentation streamlined - removed internal planning files and merged setup completion guide into CLAUDE_CODE_SETUP.md
