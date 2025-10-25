@@ -23,6 +23,10 @@ dist/
 *.xlsx
 *.xls
 
+# CSV outputs (keep folder structure)
+results/*.csv
+!results/README.md
+
 # IDE
 .vscode/
 .idea/

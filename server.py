@@ -87,6 +87,24 @@ TOOLS = [
         }
     },
     {
+        "name": "create_csv_file",
+        "description": "Create CSV file with email data and save to results folder",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "email_data": {
+                    "type": "array",
+                    "description": "Extracted email data"
+                },
+                "filename": {
+                    "type": "string",
+                    "description": "Output filename (default: emails.csv, will be saved in results/ folder with timestamp)"
+                }
+            },
+            "required": ["email_data"]
+        }
+    },
+    {
         "name": "get_email_count",
         "description": "Get count of emails matching specific criteria",
         "input_schema": {
@@ -136,6 +154,12 @@ def handle_tool_call(tool_name, arguments):
             keywords=arguments.get('keywords'),
             max_results=arguments.get('max_results', 100)
         )
+        # Automatically save to CSV
+        if result:
+            csv_filename = server.create_csv_file(result, 'lesson_emails.csv')
+            result_text = f"Extracted {len(result)} emails. CSV saved to: {csv_filename}\n\n"
+            result_text += json.dumps(result, ensure_ascii=False, indent=2)
+            return result_text
         return json.dumps(result, ensure_ascii=False, indent=2)
 
     elif tool_name == 'summarize_emails':
@@ -162,10 +186,23 @@ def handle_tool_call(tool_name, arguments):
         )
         return f"Email count: {count}"
 
+    elif tool_name == 'create_csv_file':
+        csv_filename = server.create_csv_file(
+            email_data=arguments['email_data'],
+            filename=arguments.get('filename', 'emails.csv')
+        )
+        return f"CSV file created: {csv_filename}"
+
     elif tool_name == 'get_recent_emails':
         result = server.get_recent_emails(
             max_results=arguments.get('max_results', 10)
         )
+        # Automatically save to CSV
+        if result:
+            csv_filename = server.create_csv_file(result, 'recent_emails.csv')
+            result_text = f"Retrieved {len(result)} recent emails. CSV saved to: {csv_filename}\n\n"
+            result_text += json.dumps(result, ensure_ascii=False, indent=2)
+            return result_text
         return json.dumps(result, ensure_ascii=False, indent=2)
 
     else:

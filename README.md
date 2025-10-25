@@ -7,6 +7,7 @@ MCP (Model Context Protocol) server for extracting and analyzing emails from Gma
 ✨ **Email Extraction**: Filter emails by date, recipient, and keywords
 🤖 **AI Summaries**: Intelligent summaries using Google Gemini API
 📊 **Excel Export**: Professional Excel files with Hebrew support
+📁 **CSV Export**: Automatic CSV file generation in results folder
 📈 **Statistics**: Email counts, top senders, and patterns
 
 ## Quick Start
@@ -120,15 +121,16 @@ python get_recent_emails.py 10
 
 ### Example Commands
 
-**Get recent emails:**
+**Get recent emails (auto-saves to CSV):**
 ```
 Show me my last 3 emails
 What are my 5 most recent emails?
 ```
 
-**Extract lesson emails:**
+**Extract lesson emails (auto-saves to CSV):**
 ```
 Show me all lesson emails from October 2025
+Extract emails from last week with keyword "assignment"
 ```
 
 **Get summary:**
@@ -141,14 +143,24 @@ Summarize my emails from last month
 Extract homework emails and create an Excel file
 ```
 
+**Create CSV file:**
+```
+Create a CSV file from extracted emails
+Export emails to CSV format
+```
+
 ## Available Tools
 
 ### 1. get_recent_emails
 
-Get the most recent emails from your inbox without date filtering.
+Get the most recent emails from your inbox without date filtering. **Automatically saves results to CSV file in results/ folder.**
 
 **Parameters:**
 - `max_results` (optional): Number of recent emails to retrieve (default: 10, max: 100)
+
+**Output:**
+- JSON response with email data
+- CSV file: `results/recent_emails_YYYYMMDD_HHMMSS.csv`
 
 **Example:**
 ```
@@ -158,7 +170,7 @@ Get my 3 most recent emails
 
 ### 2. extract_lesson_emails
 
-Extract emails with advanced filtering.
+Extract emails with advanced filtering. **Automatically saves results to CSV file in results/ folder.**
 
 **Parameters:**
 - `start_date` (required): YYYY-MM-DD
@@ -166,6 +178,10 @@ Extract emails with advanced filtering.
 - `recipient` (optional): Email address (default: elena.nur.study@gmail.com)
 - `keywords` (optional): Array of keywords
 - `max_results` (optional): Max emails to return (default: 100)
+
+**Output:**
+- JSON response with email data
+- CSV file: `results/lesson_emails_YYYYMMDD_HHMMSS.csv`
 
 ### 3. summarize_emails
 
@@ -184,6 +200,24 @@ Create Excel file with Hebrew support.
 - `email_data` (required): Array of email objects
 - `filename` (optional): Output filename
 - `sheet_name` (optional): Excel sheet name
+
+### 4.5. create_csv_file
+
+Create CSV file and save to results folder with timestamp.
+
+**Parameters:**
+- `email_data` (required): Array of email objects
+- `filename` (optional): Output filename (default: emails.csv)
+
+**Output:**
+- CSV file saved to: `results/[filename]_YYYYMMDD_HHMMSS.csv`
+- Includes: Date, From, To, Subject, Snippet, Has Attachments, Labels
+
+**Example:**
+```
+Create a CSV file from these emails
+Export the extracted emails to CSV
+```
 
 ### 5. get_email_count
 
@@ -220,6 +254,20 @@ Count emails matching criteria.
 - Verify recipient email address
 - Test with broader date range
 
+## CSV Export Details
+
+All email extraction operations automatically save results to CSV files in the `results/` folder:
+
+- **Automatic timestamping**: Files include timestamp to prevent overwrites
+- **Location**: All CSV files saved to `results/` folder
+- **Format**: Standard CSV with UTF-8 encoding
+- **Columns**: Date, From, To, Subject, Snippet, Has Attachments, Labels
+
+**Example files:**
+- `results/recent_emails_20251025_143022.csv`
+- `results/lesson_emails_20251025_143045.csv`
+- `results/emails_20251025_143100.csv`
+
 ## Security Notes
 
 ⚠️ **Never commit these files to Git:**
@@ -227,6 +275,7 @@ Count emails matching criteria.
 - `token.json`
 - `config.json`
 - `.env`
+- `results/*.csv` (contains your email data)
 
 Already added to `.gitignore`
 

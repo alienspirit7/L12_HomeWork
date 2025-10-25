@@ -8,24 +8,25 @@
 | Field | Value |
 |-------|-------|
 | **Product Name** | Gmail MCP Server |
-| **Version** | 1.1 |
-| **Date** | October 23, 2025 |
+| **Version** | 1.2 |
+| **Date** | October 25, 2025 |
 | **Owner** | Development Team |
 | **Status** | Completed |
-| **Estimated Effort** | 3.5 hours |
-| **Actual Effort** | 3.5 hours |
+| **Estimated Effort** | 4.0 hours |
+| **Actual Effort** | 4.0 hours |
 
 ---
 
 ## 1. Executive Summary
 
 ### 1.1 Product Overview
-Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI assistant to interact with Gmail accounts. It provides email extraction, AI-powered summarization using Google Gemini, and Excel export capabilities with Hebrew language support.
+Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI assistant to interact with Gmail accounts. It provides email extraction, AI-powered summarization using Google Gemini, Excel export, and automatic CSV export capabilities with Hebrew language support. All email extraction operations automatically save results to timestamped CSV files in the results folder.
 
 ### 1.2 Business Objectives
 - Enable AI-assisted email management and analysis
 - Reduce time spent manually reviewing emails
 - Provide intelligent summaries of email communications
+- Automatic CSV export for easy data analysis and archival
 - Support Hebrew language for Israeli users
 - Integrate seamlessly with Claude CLI workflow
 
@@ -69,8 +70,9 @@ Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI
 1. **Email Extraction**: Enable filtered email retrieval from Gmail with date, recipient, and keyword filters
 2. **AI Summarization**: Provide intelligent email summaries in Hebrew using Gemini AI
 3. **Data Export**: Generate professional Excel reports with Hebrew support
-4. **MCP Integration**: Seamless integration with Claude CLI via MCP protocol
-5. **Security**: Secure handling of OAuth credentials and API keys
+4. **CSV Export**: Automatic CSV file generation with timestamps for all email extractions
+5. **MCP Integration**: Seamless integration with Claude CLI via MCP protocol
+6. **Security**: Secure handling of OAuth credentials and API keys
 
 ### 3.2 Secondary Goals
 1. Provide email statistics (counts, top senders, top subjects)
@@ -330,7 +332,34 @@ Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI
 
 **Output**: String with created filename
 
-### 5.5 Email Count (get_email_count)
+### 5.5 CSV Export (create_csv_file)
+
+**Priority**: P0 (Must Have)
+
+**Requirements**:
+- **FR-3.5**: Create CSV format files with UTF-8 encoding
+- **FR-3.6**: Automatically save to results/ folder with timestamp
+- **FR-3.7**: Include columns: Date, From, To, Subject, Snippet, Has Attachments, Labels
+- **FR-3.8**: Format dates as YYYY-MM-DD HH:MM:SS
+- **FR-3.9**: Support custom filename (default: emails.csv)
+- **FR-3.10**: Prevent overwrites with automatic timestamping
+- **FR-3.11**: Create results folder if it doesn't exist
+
+**Input Schema**:
+```json
+{
+  "email_data": [/* array of email objects */],
+  "filename": "emails.csv"
+}
+```
+
+**Output**: String with full path to created CSV file (e.g., "results/emails_20251025_143022.csv")
+
+**Automatic CSV Export**:
+- `extract_lesson_emails` automatically saves to `results/lesson_emails_YYYYMMDD_HHMMSS.csv`
+- `get_recent_emails` automatically saves to `results/recent_emails_YYYYMMDD_HHMMSS.csv`
+
+### 5.6 Email Count (get_email_count)
 
 **Priority**: P1 (Should Have)
 
@@ -351,7 +380,7 @@ Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI
 
 **Output**: Integer count
 
-### 5.6 Authentication
+### 5.7 Authentication
 
 **Priority**: P0 (Must Have)
 
@@ -365,7 +394,7 @@ Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI
 - **FR-5.7**: Open browser for user consent
 - **FR-5.8**: Handle authentication errors with clear messages
 
-### 5.7 MCP Integration
+### 5.8 MCP Integration
 
 **Priority**: P0 (Must Have)
 
@@ -544,13 +573,16 @@ Gmail MCP Server is a Model Context Protocol (MCP) server that enables Claude AI
 
 ```
 L12_HomeWork/
-├── server.py              # MCP protocol handler (150 lines)
-├── gmail_client.py        # Core business logic (350 lines)
+├── server.py              # MCP protocol handler (190 lines)
+├── gmail_client.py        # Core business logic (400 lines)
 ├── auth.py                # OAuth authentication (50 lines)
 ├── requirements.txt       # Dependencies (6 packages)
 ├── config.json            # Configuration + API key
 ├── credentials.json       # Gmail OAuth credentials
 ├── token.json             # Generated access token (auto-created)
+├── results/               # CSV export folder
+│   ├── README.md          # Results folder documentation
+│   └── *.csv              # Timestamped CSV exports (gitignored)
 ├── .env.example           # Environment template
 ├── .gitignore            # Security protection
 ├── README.md             # User documentation
@@ -824,6 +856,7 @@ python auth.py
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 1.0 | 2025-10-23 | Development Team | Initial PRD creation after project completion |
+| 1.2 | 2025-10-25 | Development Team | Added CSV export functionality with automatic timestamping and results folder |
 
 ---
 

@@ -13,6 +13,7 @@ import os
 import google.generativeai as genai
 from collections import Counter
 import base64
+import csv
 
 
 class GmailMCPServer:
@@ -20,6 +21,7 @@ class GmailMCPServer:
         self.gmail_service = None
         self.gemini_model = None
         self._setup_gemini()
+        self._ensure_results_folder()
 
     def _setup_gemini(self):
         """Initialize Gemini API"""
@@ -38,6 +40,11 @@ class GmailMCPServer:
             self.gemini_model = genai.GenerativeModel('gemini-1.5-flash')
         else:
             print("Warning: Gemini API key not found. Summary feature disabled.")
+
+    def _ensure_results_folder(self):
+        """Create results folder if it doesn't exist"""
+        if not os.path.exists('results'):
+            os.makedirs('results')
 
     def authenticate(self):
         """Authenticate with Gmail API"""
@@ -317,6 +324,60 @@ Keep it SHORT and actionable. Use Hebrew.
             ws.column_dimensions[column_letter].width = adjusted_width
 
         wb.save(filename)
+        return filename
+
+    def create_csv_file(self, email_data, filename='emails.csv'):
+        """
+        Create CSV file with email data
+
+        Args:
+            email_data: List of email dictionaries
+            filename: Output filename (default: emails.csv)
+
+        Returns:
+            Full path to the created CSV file
+        """
+        # Ensure results folder exists
+        self._ensure_results_folder()
+
+        # Add timestamp to filename if not specified with full path
+        if not filename.startswith('results/'):
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            base_name = filename.rsplit('.', 1)[0] if '.' in filename else filename
+            filename = f'results/{base_name}_{timestamp}.csv'
+
+        # Write CSV file
+        with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
+            fieldnames = ['Date', 'From', 'To', 'Subject', 'Snippet', 'Has Attachments', 'Labels']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+            # Write header
+            writer.writeheader()
+
+            # Write data rows
+            for email in email_data:
+                # Format date
+                date_str = email.get('date', '')
+                try:
+                    date_obj = datetime.strptime(date_str, '%a, %d %b %Y %H:%M:%S %z')
+                    formatted_date = date_obj.strftime('%Y-%m-%d %H:%M:%S')
+                except:
+                    formatted_date = date_str
+
+                # Format labels
+                labels = ', '.join(email.get('labels', []))
+
+                # Write row
+                writer.writerow({
+                    'Date': formatted_date,
+                    'From': email.get('from', ''),
+                    'To': email.get('to', ''),
+                    'Subject': email.get('subject', ''),
+                    'Snippet': email.get('snippet', ''),
+                    'Has Attachments': 'Yes' if email.get('has_attachments') else 'No',
+                    'Labels': labels
+                })
+
         return filename
 
     def get_email_count(self, query=None, start_date=None, end_date=None):
