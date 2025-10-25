@@ -234,6 +234,84 @@ Create a CSV file from extracted emails
 Export emails to CSV format
 ```
 
+## Live Demo: Using Gmail MCP with Claude Code
+
+This section shows real examples of using the Gmail MCP server with Claude Code in VS Code to answer questions about your inbox.
+
+### Example 1: Verifying MCP Configuration
+
+First, we confirmed the Gmail MCP server was properly configured in Claude Code:
+
+![MCP Configuration Check](images/Screenshot%202025-10-25%20at%2013.55.35.png)
+
+**What happened**: Claude Code verified the MCP configuration at `~/.config/claude-code/mcp.json` and confirmed access to all Gmail MCP tools.
+
+### Example 2: Counting Emails from Google
+
+**Question**: "How many emails did I have from Google in the last 3 weeks?"
+
+![Google Email Count](images/Screenshot%202025-10-25%20at%2013.56.01.png)
+
+**Result**: Claude Code used the `get_email_count` tool with query filtering to find **3 emails from Google** since October 4, 2025.
+
+### Example 3: Getting Email Descriptions
+
+**Question**: "Provide short descriptions of those emails"
+
+![Email Descriptions](images/Screenshot%202025-10-25%20at%2013.57.17.png)
+
+**Result**: Using `extract_lesson_emails` with keyword filtering, Claude Code retrieved and summarized:
+1. AI Resources from Google Cloud (Oct 24)
+2. Security Alert about API access (Oct 23)
+3. Google Cloud Free Trial Confirmation (Oct 19)
+
+### Example 4: Analyzing All Inbox Emails
+
+**Question**: "What kind of other emails are there in my inbox in the last 3 weeks?"
+
+![Inbox Analysis](images/Screenshot%202025-10-25%20at%2013.58.01.png)
+
+**Result**: Claude Code analyzed all 11 emails and categorized them by sender:
+- 8 forwarded emails from Elena Nurmanov
+- 3 emails from Google (Cloud + Security)
+
+![Detailed Analysis](images/Screenshot%202025-10-25%20at%2013.58.59.png)
+
+The analysis showed forwarded newsletters about AI/tech and retail promotions in Hebrew.
+
+### Example 5: Total Inbox Statistics
+
+**Question**: "How many emails do I have in my inbox in total and what are the first and last dates of these emails?"
+
+![Total Count Query](images/Screenshot%202025-10-25%20at%2013.59.26.png)
+
+**Result**: Claude Code determined:
+- **Total**: 11 emails in inbox
+- **Date Range**: October 19-24, 2025 (5 days)
+- **First email**: Oct 19, 2025 at 19:12
+- **Last email**: Oct 24, 2025 at 16:20
+
+### Key Benefits Demonstrated
+
+✅ **Natural Language Queries**: Ask questions in plain English without knowing API syntax
+✅ **Intelligent Filtering**: Automatic query construction with date ranges and keywords
+✅ **Data Analysis**: Claude analyzes patterns, counts, and trends in your emails
+✅ **Context Awareness**: Follow-up questions reference previous results
+✅ **Multiple Tools**: Seamlessly combines `get_email_count`, `extract_lesson_emails`, and `get_recent_emails`
+
+### How It Works
+
+When you ask Claude Code a question about your emails:
+
+1. **Query Understanding**: Claude interprets your natural language question
+2. **Tool Selection**: Chooses the appropriate MCP tool (`mcp__gmail__get_email_count`, `mcp__gmail__extract_lesson_emails`, etc.)
+3. **Parameter Construction**: Builds proper date ranges, queries, and filters
+4. **Execution**: Runs Python code to fetch data from Gmail API
+5. **Analysis**: Processes results and provides insights
+6. **Response**: Returns human-readable answers with statistics
+
+All of this happens automatically through the MCP protocol integration!
+
 ## Available Tools
 
 ### 1. get_recent_emails
