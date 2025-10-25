@@ -2,6 +2,8 @@
 
 MCP (Model Context Protocol) server for extracting and analyzing emails from Gmail with AI-powered summarization.
 
+> **📚 Documentation Guide**: New to this project? See [DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md) to find the right guide for your needs!
+
 ## Features
 
 ✨ **Email Extraction**: Filter emails by date, recipient, and keywords
@@ -61,6 +63,8 @@ python server.py
 
 ## Usage with Claude
 
+> **📌 Quick Setup for Claude Code Users**: See [CLAUDE_CODE_SETUP.md](CLAUDE_CODE_SETUP.md) for a dedicated step-by-step guide!
+
 ### Configure Claude CLI
 
 Create or edit the MCP configuration file at `~/.claude/mcp_config.json`:
@@ -86,6 +90,87 @@ After creating the config file:
 1. Exit Claude CLI (type `exit` or press Ctrl+D)
 2. Restart Claude CLI: `claude`
 3. The Gmail MCP server will be automatically loaded
+
+### Configure Claude Code (Recommended for VS Code Users)
+
+If you're using **Claude Code** (Claude's VS Code extension), follow these steps:
+
+#### Step 1: Create MCP Configuration
+
+Create the MCP config file at `~/.config/claude-code/mcp.json`:
+
+```bash
+# Create the config directory
+mkdir -p ~/.config/claude-code
+
+# Create the config file
+cat > ~/.config/claude-code/mcp.json << 'EOF'
+{
+  "mcpServers": {
+    "gmail": {
+      "command": "python3",
+      "args": [
+        "/Users/alienspirit/Documents/25D/L12_HomeWork/server.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/Users/alienspirit/Documents/25D/L12_HomeWork",
+        "GEMINI_API_KEY": "${GEMINI_API_KEY}"
+      }
+    }
+  }
+}
+EOF
+```
+
+**Important**: Update the paths to match your actual project location!
+
+#### Step 2: Set Environment Variable (Optional)
+
+If you want to use an environment variable for your Gemini API key:
+
+```bash
+# Add to ~/.zshrc or ~/.bashrc
+echo 'export GEMINI_API_KEY="your-gemini-api-key-here"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+Or keep using the `config.json` file in your project (no environment variable needed).
+
+#### Step 3: Restart Claude Code
+
+1. Completely quit VS Code (Cmd+Q on macOS)
+2. Reopen VS Code
+3. Open Claude Code
+
+#### Step 4: Verify Setup
+
+Run the test script to verify everything is configured correctly:
+
+```bash
+python3 test_mcp_setup.py
+```
+
+You should see all tests pass:
+```
+✓ PASS   - Server Startup
+✓ PASS   - Authentication
+✓ PASS   - Email Count
+✓ PASS   - Recent Emails
+✓ PASS   - Gemini API
+✓ PASS   - MCP Config
+```
+
+#### Step 5: Use in Claude Code
+
+After restarting, you can use Gmail tools directly in Claude Code:
+
+```
+How many emails did I get from Google in the last 2 weeks?
+Get my 10 most recent emails
+Extract all emails from October 2025
+```
+
+Claude Code will use the MCP tools automatically, and you'll see tool names prefixed with `mcp__gmail__` (like `mcp__gmail__get_email_count`).
 
 ### Configure Claude Desktop (Alternative)
 

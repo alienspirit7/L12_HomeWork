@@ -949,6 +949,86 @@ Please create all these files in a directory called 'gmail-mcp-server' with the 
 
 ---
 
+## Configuring for Claude Code (VS Code Extension)
+
+If you're using Claude Code in VS Code, follow these steps:
+
+### Step 1: Create MCP Configuration File
+
+```bash
+# Create config directory
+mkdir -p ~/.config/claude-code
+
+# Create MCP config file
+cat > ~/.config/claude-code/mcp.json << 'EOF'
+{
+  "mcpServers": {
+    "gmail": {
+      "command": "python3",
+      "args": [
+        "/full/path/to/your/project/server.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/full/path/to/your/project",
+        "GEMINI_API_KEY": "${GEMINI_API_KEY}"
+      }
+    }
+  }
+}
+EOF
+```
+
+**IMPORTANT**: Replace `/full/path/to/your/project` with your actual project path!
+
+### Step 2: (Optional) Set Environment Variable
+
+```bash
+# Option 1: Add to shell config
+echo 'export GEMINI_API_KEY="your-api-key-here"' >> ~/.zshrc
+source ~/.zshrc
+
+# Option 2: Use config.json in project (already set up)
+```
+
+### Step 3: Verify Setup
+
+```bash
+# Run the test script
+cd /path/to/your/project
+python3 test_mcp_setup.py
+```
+
+Expected output:
+```
+✓ PASS   - Server Startup
+✓ PASS   - Authentication
+✓ PASS   - Email Count
+✓ PASS   - Recent Emails
+✓ PASS   - Gemini API
+✓ PASS   - MCP Config
+
+Results: 6/6 tests passed
+```
+
+### Step 4: Restart Claude Code
+
+1. Completely quit VS Code (Cmd+Q on macOS, Alt+F4 on Windows)
+2. Reopen VS Code
+3. Open Claude Code in the sidebar
+4. The Gmail MCP server will load automatically
+
+### Step 5: Test MCP Tools
+
+Ask Claude Code:
+```
+How many emails did I get in the last week?
+Get my 5 most recent emails
+```
+
+You should see Claude using tools prefixed with `mcp__gmail__`.
+
+---
+
 ## After Claude CLI Creates Files
 
 ### Next Steps:
