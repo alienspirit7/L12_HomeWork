@@ -4,6 +4,7 @@ config.json
 
 # Gmail credentials and tokens
 credentials.json
+client_secret.json
 token.json
 
 # Python
